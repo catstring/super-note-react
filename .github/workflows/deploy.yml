@@ -32,20 +32,20 @@ jobs:
     - name: Install dependencies on EC2
       run: |
         ssh -o StrictHostKeyChecking=no ec2-user@54.253.52.106 << 'EOF'
-          sudo yum update -y
-          sudo yum install -y git nginx
-          sudo systemctl start nginx
-          sudo systemctl enable nginx
-          sudo mkdir -p /var/www/super-note-react
-          sudo chown -R ec2-user:ec2-user /var/www/super-note-react
-          sudo chmod -R 775 /var/www/super-note-react
+        #   sudo yum update -y
+        #   sudo yum install -y git nginx
+        #   sudo systemctl start nginx
+        #   sudo systemctl enable nginx
+        #   sudo mkdir -p /var/www/super-note-react
+        #   sudo chown -R ec2-user:ec2-user /var/www/super-note-react
+        #   sudo chmod -R 775 /var/www/super-note-react
         EOF
 
     - name: Deploy to EC2
       run: |
         rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" * ec2-user@54.253.52.106:/var/www/super-note-react/
         ssh -o StrictHostKeyChecking=no ec2-user@54.253.52.106 << 'EOF'
-          sudo chown -R nginx:nginx /var/www/super-note-react
-          sudo systemctl restart nginx
+        #   sudo chown -R nginx:nginx /var/www/super-note-react
+        #   sudo systemctl restart nginx
         EOF
 
